@@ -306,7 +306,7 @@ section#sec--contact .panels .card#card--email a:active img, section#sec--contac
 section#sec--contact .panels .card#card--email a:active p, section#sec--contact .panels .card#card--cv a:active p {
   opacity: 1;
 }
-section#sec--contact .panels .card#card--email #copied, section#sec--contact .panels .card#card--email #donwlaoded, section#sec--contact .panels .card#card--cv #copied, section#sec--contact .panels .card#card--cv #donwlaoded {
+section#sec--contact .panels .card#card--email #copied, section#sec--contact .panels .card#card--email #downloaded, section#sec--contact .panels .card#card--cv #copied, section#sec--contact .panels .card#card--cv #downloaded {
   display: none;
 }
 

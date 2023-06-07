@@ -75,26 +75,24 @@ nav ul li a:after {
   --height: 2rem;
   --from-color: #0ef80e;
   --to-color: #e600ff;
-  background-color: var(--from-color);
   position: relative;
+  overflow-x: hidden;
+  background-color: var(--from-color);
 }
 .sep:after {
   content: "";
   position: absolute;
   height: 0;
   width: 0;
+  right: 0;
+  top: 0;
+  border-bottom: var(--height) solid var(--to-color);
 }
 .sep.triangle-right:after {
-  border-bottom: var(--height) solid var(--to-color);
-  border-left: 99vw solid transparent;
-}
-.sep.triangle-right:after {
-  border-bottom: var(--height) solid var(--to-color);
-  border-left: 99vw solid transparent;
+  border-right: 100vw solid transparent;
 }
 .sep.triangle-left:after {
-  border-bottom: var(--height) solid var(--to-color);
-  border-right: 99vw solid transparent;
+  border-left: 100vw solid transparent;
 }
 .sep#sep--yellow-red {
   --from-color: var(--clr-yellow);
@@ -154,7 +152,6 @@ section .panels {
   display: flex;
   gap: 5rem;
   justify-content: center;
-  align-items: center;
 }
 section .panels .card {
   background-color: white;
@@ -162,12 +159,13 @@ section .panels .card {
   border-radius: 1.2rem;
   box-shadow: 0 0 0.2rem black, 0.5rem 0.5rem 0.8rem 0 grey;
   padding: 2rem;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 section .panels .card img {
+  margin-top: auto;
   width: 100%;
 }
 section#sec--about {
@@ -197,6 +195,7 @@ section#sec--work-experience h2 {
 }
 section#sec--work-experience h3 {
   color: white;
+  font-weight: 500;
 }
 section#sec--training {
   --bg-color: var(--clr-blue);
@@ -236,6 +235,79 @@ section#sec--contact h2 {
   font-size: 5rem;
   display: flex;
   gap: 2rem;
+}
+section#sec--contact .panels .card {
+  width: 30ch;
+}
+section#sec--contact .panels .card#card--github a {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  position: relative;
+  transition: opacity 400ms ease;
+}
+section#sec--contact .panels .card#card--github a:hover, section#sec--contact .panels .card#card--github a:focus {
+  opacity: 0.8;
+}
+section#sec--contact .panels .card#card--github a:active {
+  opacity: 0.5;
+}
+section#sec--contact .panels .card#card--github a img#profile-pic {
+  margin: 0;
+  aspect-ratio: 1;
+  width: 98%;
+  border-radius: 50%;
+}
+section#sec--contact .panels .card#card--github a div#github-logo {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  border-radius: 50%;
+}
+section#sec--contact .panels .card#card--github a div#github-logo img {
+  margin: 0;
+}
+section#sec--contact .panels .card#card--email a, section#sec--contact .panels .card#card--cv a {
+  margin-block: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+section#sec--contact .panels .card#card--email a p, section#sec--contact .panels .card#card--cv a p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  z-index: 2;
+  opacity: 0;
+  color: black;
+  transition: opacity 400ms ease;
+}
+section#sec--contact .panels .card#card--email a img, section#sec--contact .panels .card#card--cv a img {
+  width: 100%;
+  margin-top: auto;
+  opacity: 1;
+  transition: opacity 400ms ease;
+}
+section#sec--contact .panels .card#card--email a:hover img, section#sec--contact .panels .card#card--email a:focus img, section#sec--contact .panels .card#card--cv a:hover img, section#sec--contact .panels .card#card--cv a:focus img {
+  opacity: 0.5;
+}
+section#sec--contact .panels .card#card--email a:hover p, section#sec--contact .panels .card#card--email a:focus p, section#sec--contact .panels .card#card--cv a:hover p, section#sec--contact .panels .card#card--cv a:focus p {
+  opacity: 1;
+}
+section#sec--contact .panels .card#card--email a:active img, section#sec--contact .panels .card#card--cv a:active img {
+  opacity: 0.3;
+}
+section#sec--contact .panels .card#card--email a:active p, section#sec--contact .panels .card#card--cv a:active p {
+  opacity: 1;
+}
+section#sec--contact .panels .card#card--email #copied, section#sec--contact .panels .card#card--email #donwlaoded, section#sec--contact .panels .card#card--cv #copied, section#sec--contact .panels .card#card--cv #donwlaoded {
+  display: none;
 }
 
 /*# sourceMappingURL=index.css.map */

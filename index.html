@@ -122,6 +122,34 @@
 
 <section id="sec--contact">
     <h2>Contact</h2>
+    <div class="panels">
+        <div class="card" id="card--github">
+            <h4>GitHub</h4>
+            <p>pabloduran016</p>
+            <a href="https://github.com/pabloduran016">
+                <img id="profile-pic" src="assets/images/pablo-selfie-square.jpg" alt="Selfie of Pablo Duran">
+                <div id="github-logo"><img src="assets/images/github-logo.svg" alt="Github logo" height="75px" width="75px"></div>
+            </a>
+        </div>
+        <div class="card" id="card--email">
+            <h4>Email</h4>
+            <p>pdrm56@gmail.com</p>
+            <a onclick="navigator.clipboard.writeText('pdrm56@gmail.com'); document.getElementById('copied').style.display = 'block'">
+                <p>Copy</p>
+                <img src="assets/images/email-logo.svg" alt="Email Logo">
+            </a>
+            <p id="copied">Copied!</p>
+        </div>
+        <div class="card" id="card--cv">
+            <h4>CV</h4>
+            <p>Curriculum Vitae</p>
+            <a href="assets/pdf/CurriculumVitae_english.pdf" download onclick="document.getElementById('donwloaded').style.display = 'block'">
+                <p>Dowload</p>
+                <img src="assets/images/cv-logo.svg" alt="Curriculum Vitae Logo">
+            </a>
+            <p id="donwlaoded">Downloaded!</p>
+        </div>
+    </div>
 </section>
 
 </body>

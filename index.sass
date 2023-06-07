@@ -70,25 +70,23 @@ nav
   --height: 2rem
   --from-color: #0ef80e
   --to-color: #e600ff
-  background-color: var(--from-color)
   position: relative
+  overflow-x: hidden
+  background-color: var(--from-color)
   &:after
     content: ''
     position: absolute
     height: 0
     width: 0
+    right: 0
+    top: 0
+    border-bottom: var(--height) solid var(--to-color)
   &.triangle-right
     &:after
-      border-bottom: var(--height) solid var(--to-color)
-      border-left: 99vw solid transparent
-  &.triangle-right
-    &:after
-      border-bottom: var(--height) solid var(--to-color)
-      border-left: 99vw solid transparent
+      border-right: 100vw solid transparent
   &.triangle-left
     &:after
-      border-bottom: var(--height) solid var(--to-color)
-      border-right: 99vw solid transparent
+      border-left: 100vw solid transparent
 
   &#sep--yellow-red
     --from-color: var(--clr-yellow)
@@ -141,19 +139,19 @@ section
     display: flex
     gap: 5rem
     justify-content: center
-    align-items: center
     .card
       background-color: white
       max-width: 40ch
       border-radius: 1.2rem
       box-shadow: 0 0 .2rem black, .5rem .5rem .8rem 0 grey
       padding: 2rem
-      height: 100%
+      min-height: 100%
       display: flex
       flex-direction: column
       gap: 2rem
 
       img
+        margin-top: auto
         width: 100%
 
   &#sec--about
@@ -182,6 +180,7 @@ section
       gap: 2rem
     h3
       color: white
+      font-weight: 500
 
 
   &#sec--training
@@ -223,3 +222,67 @@ section
       font-size: 5rem
       display: flex
       gap: 2rem
+
+    .panels
+      .card
+        width: 30ch
+        &#card--github
+          a
+            background-color: black
+            display: flex
+            align-items: center
+            justify-content: center
+            border-radius: 50%
+            aspect-ratio: 1
+            position: relative
+            transition: opacity 400ms ease
+            &:hover, &:focus
+              opacity: 0.8
+            &:active
+              opacity: 0.5
+            img#profile-pic
+              margin: 0
+              aspect-ratio: 1
+              width: 98%
+              border-radius: 50%
+            div#github-logo
+              position: absolute
+              bottom: 0
+              right: 0
+              background-color: white
+              border-radius: 50%
+              img
+                margin: 0
+        &#card--email, &#card--cv
+          a
+            margin-block: auto
+            position: relative
+            display: flex
+            flex-direction: column
+            p
+              position: absolute
+              top: 50%
+              left: 50%
+              transform: translate(-50%, -50%)
+              font-size: 2rem
+              z-index: 2
+              opacity: 0
+              color: black
+              transition: opacity 400ms ease
+            img
+              width: 100%
+              margin-top: auto
+              opacity: 1
+              transition: opacity 400ms ease
+            &:hover, &:focus
+              img
+                opacity: 0.5
+              p
+                opacity: 1
+            &:active
+              img
+                opacity: 0.3
+              p
+                opacity: 1
+          #copied, #donwlaoded
+            display: none

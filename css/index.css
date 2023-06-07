@@ -1,0 +1,241 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+  font-family: "Source Code Pro", monospace;
+  background-color: #C2EABD;
+  --clr-white: #FFFFFF;
+  --clr-grey: #465362;
+  --clr-blue: #011936;
+  --clr-red: hsl(348, 85%, 44%);
+  --clr-yellow: #F9DC5C;
+}
+
+nav {
+  z-index: 100;
+  position: sticky;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 4rem;
+  max-height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #C2EABD;
+  box-shadow: 0 0.1px 10px grey;
+}
+nav > a {
+  font-size: 2rem;
+  text-decoration: none;
+  color: hsl(147deg, 40%, 20%);
+  position: relative;
+  transition: color 400ms ease;
+}
+nav > a:hover {
+  color: hsl(147deg, 40%, 50%);
+}
+nav ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+nav ul li a {
+  text-decoration: none;
+  color: hsl(147deg, 40%, 20%);
+  position: relative;
+}
+nav ul li a:hover:after {
+  width: 100%;
+}
+nav ul li a:after {
+  transition: width 400ms ease;
+  width: 0;
+  content: "";
+  position: absolute;
+  top: 100.1%;
+  left: 0;
+  height: 2px;
+  background-color: hsl(147deg, 40%, 20%);
+}
+
+.sep {
+  width: 100%;
+  height: var(--height);
+  --height: 2rem;
+  --from-color: #0ef80e;
+  --to-color: #e600ff;
+  background-color: var(--from-color);
+  position: relative;
+}
+.sep:after {
+  content: "";
+  position: absolute;
+  height: 0;
+  width: 0;
+}
+.sep.triangle-right:after {
+  border-bottom: var(--height) solid var(--to-color);
+  border-left: 99vw solid transparent;
+}
+.sep.triangle-right:after {
+  border-bottom: var(--height) solid var(--to-color);
+  border-left: 99vw solid transparent;
+}
+.sep.triangle-left:after {
+  border-bottom: var(--height) solid var(--to-color);
+  border-right: 99vw solid transparent;
+}
+.sep#sep--yellow-red {
+  --from-color: var(--clr-yellow);
+  --to-color: var(--clr-red);
+}
+.sep#sep--white-yellow {
+  --from-color: var(--clr-white);
+  --to-color: var(--clr-yellow);
+}
+.sep#sep--red-blue {
+  --from-color: var(--clr-red);
+  --to-color: var(--clr-blue);
+}
+.sep#sep--blue-grey {
+  --from-color: var(--clr-blue);
+  --to-color: var(--clr-grey);
+}
+
+section {
+  min-width: 100%;
+  background-color: var(--bg-color);
+}
+section#sec--home {
+  --bg-color: var(--clr-white);
+  padding: 2rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  justify-content: center;
+}
+section#sec--home .left {
+  padding-block: 6rem;
+  padding-inline: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+section#sec--home .left h1 {
+  display: block;
+  font-size: 11rem;
+  line-height: 8rem;
+}
+section#sec--home .left h3 {
+  padding-left: 0.5rem;
+  font-weight: 400;
+}
+section#sec--home .right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section#sec--home img {
+  width: 100%;
+  border-radius: 2rem;
+}
+section .panels {
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
+  align-items: center;
+}
+section .panels .card {
+  background-color: white;
+  max-width: 40ch;
+  border-radius: 1.2rem;
+  box-shadow: 0 0 0.2rem black, 0.5rem 0.5rem 0.8rem 0 grey;
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+section .panels .card img {
+  width: 100%;
+}
+section#sec--about {
+  --bg-color: var(--clr-yellow);
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+section#sec--about h2 {
+  font-size: 5rem;
+  display: flex;
+  gap: 2rem;
+}
+section#sec--work-experience {
+  --bg-color: var(--clr-red);
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+section#sec--work-experience h2 {
+  color: white;
+  font-size: 5rem;
+  display: flex;
+  gap: 2rem;
+}
+section#sec--work-experience h3 {
+  color: white;
+}
+section#sec--training {
+  --bg-color: var(--clr-blue);
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+section#sec--training h2 {
+  color: white;
+  font-size: 5rem;
+  display: flex;
+  gap: 2rem;
+}
+section#sec--gallery {
+  --bg-color: var(--clr-grey);
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+section#sec--gallery h2 {
+  color: white;
+  font-size: 5rem;
+  display: flex;
+  gap: 2rem;
+}
+section#sec--contact {
+  --bg-color: #000000;
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+section#sec--contact h2 {
+  color: white;
+  font-size: 5rem;
+  display: flex;
+  gap: 2rem;
+}
+
+/*# sourceMappingURL=index.css.map */

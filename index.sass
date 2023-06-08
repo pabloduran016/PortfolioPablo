@@ -1,3 +1,5 @@
+@use "sass:math"
+
 *
   padding: 0
   margin: 0
@@ -6,19 +8,29 @@
 img
   display: block
 
-$NAV-COLOR: #C2EABD
+
+$CLR--TEA-GREEN: #C2EABD
+$CLR--BRUNSKWICK-GREEN: #1f4731
+$CLR--WHITE: #FFFFFF
+$CLR--VISTA-BLUE: #91A6FF
+$CLR--RICH-BLACK: #171A21
+$CLR--ENGLISH-VIOLET: #3F3244
+
+//$CLR--GREEN: #C2EABD
+//$CLR--WHITE: #FFFFFF
+//$CLR--GREY: #465362
+//$CLR--BLUE: #011936
+//$CLR--RED: #d01137
+//$CLR--YELLOW: #F9DC5C
+
+$NAV-HEIGHT: 4rem
+
 
 html
   scroll-behavior: smooth
-  scroll-padding-top: 4rem
+  scroll-padding-top: $NAV-HEIGHT
   font-family: 'Source Code Pro', monospace
-  background-color: $NAV-COLOR
-
-  --clr-white: #FFFFFF
-  --clr-grey: #465362
-  --clr-blue: #011936
-  --clr-red: hsl(348, 85%, 44%)
-  --clr-yellow: #F9DC5C
+  background-color: $CLR--WHITE
 
 nav
   z-index: 100
@@ -26,22 +38,23 @@ nav
   top: 0
   right: 0
   min-width: 100%
-  min-height: 4rem
-  max-height: 4rem
+  min-height: $NAV-HEIGHT
+  max-height: $NAV-HEIGHT
   display: flex
   justify-content: space-between
   align-items: center
   padding: 1rem 2rem
-  background-color: $NAV-COLOR
-  box-shadow: 0 .1px 10px grey
+  background-color: $CLR--TEA-GREEN
+  border-bottom: .2rem solid darken($CLR--TEA-GREEN, 10%)
+  box-shadow: 0 .2px 10px grey
   > a
     font-size: 2rem
     text-decoration: none
-    color: hsl(147, 40%, 20%)
+    color: $CLR--BRUNSKWICK-GREEN
     position: relative
     transition: color 400ms ease
     &:hover
-      color: hsl(147, 40%, 50%)
+      color: lighten($CLR--BRUNSKWICK-GREEN, 10%)
   ul
     display: flex
     gap: 2rem
@@ -49,7 +62,7 @@ nav
     li
       a
         text-decoration: none
-        color: hsl(147, 40%, 20%)
+        color: $CLR--BRUNSKWICK-GREEN
         position: relative
         &:hover
           &:after
@@ -62,53 +75,99 @@ nav
           top: 100.1%
           left: 0
           height: 2px
-          background-color: hsl(147, 40%, 20%)
+          background-color: $CLR--BRUNSKWICK-GREEN
+
+
+$SEP-ANGLE0: 2deg
+$SEP-ANGLEF: -2deg
+
 
 .sep
   width: 100%
   height: var(--height)
-  --height: 2rem
+  --angle: #{$SEP-ANGLE0}
+  --angle0: #{$SEP-ANGLE0}
+  --anglef: #{$SEP-ANGLEF}
+  --height: calc(100vw * #{ math.tan($SEP-ANGLE0) })
   --from-color: #0ef80e
   --to-color: #e600ff
   position: relative
   overflow-x: hidden
-  background-color: var(--from-color)
-  &:after
-    content: ''
+  overflow-y: hidden
+  background-color: transparent
+  //background-color: var(--from-color)
+
+  > div
     position: absolute
-    height: 0
-    width: 0
-    right: 0
-    top: 0
-    border-bottom: var(--height) solid var(--to-color)
-  &.triangle-right
-    &:after
-      border-right: 100vw solid transparent
+    height: var(--height)
+    width: calc(100vw / 0.9)
+    top: calc(var(--height) / 2)
+    left: 50%
+    background-color: var(--to-color)
+    transform-origin: center
+    translate: -50% 0
+    box-shadow: 0 0 .5em .03rem $CLR--RICH-BLACK
+    border-top: .1rem solid var(--dark-color)
+
   &.triangle-left
-    &:after
-      border-left: 100vw solid transparent
+    > div
+      rotate: calc(var(--angle) / 2)
+  &.triangle-right
+    > div
+      rotate: calc(-1 * var(--angle) / 2)
 
-  &#sep--yellow-red
-    --from-color: var(--clr-yellow)
-    --to-color: var(--clr-red)
-  &#sep--white-yellow
-    --from-color: var(--clr-white)
-    --to-color: var(--clr-yellow)
-  &#sep--red-blue
-    --from-color: var(--clr-red)
-    --to-color: var(--clr-blue)
-  &#sep--blue-grey
-    --from-color: var(--clr-blue)
-    --to-color: var(--clr-grey)
+  &#sep--home-about
+    //--from-color: #{$CLR--WHITE}
+    --dark-color: #{darken($CLR--VISTA-BLUE, 5%)}
+    --to-color: #{$CLR--VISTA-BLUE}
+  &#sep--about-workexp
+    //--from-color: #{$CLR--VISTA-BLUE}
+    --dark-color: #{darken($CLR--TEA-GREEN, 5%)}
+    --to-color: #{$CLR--TEA-GREEN}
+  &#sep--workexp-training
+    //--from-color: #{$CLR--TEA-GREEN}
+    --dark-color: #{darken($CLR--VISTA-BLUE, 5%)}
+    --to-color: #{$CLR--VISTA-BLUE}
+  &#sep--training-gallery
+    //--from-color: #{$CLR--VISTA-BLUE}
+    --dark-color: #{darken($CLR--ENGLISH-VIOLET, 5%)}
+    --to-color: #{$CLR--ENGLISH-VIOLET}
 
+.panels
+  display: flex
+  gap: 5rem
+  justify-content: center
+  .card
+    background-color: white
+    max-width: 40ch
+    border-radius: 1.2rem
+    box-shadow: 0 0 .2rem black, .5rem .5rem .8rem 0 grey
+    padding: 2rem
+    min-height: 100%
+    display: flex
+    flex-direction: column
+    gap: 2rem
+
+    img
+      margin-top: auto
+      width: 100%
 
 section
+  position: sticky
+  top: $NAV-HEIGHT
+
   min-width: 100%
   background-color: var(--bg-color)
+  --clr--dark: #{$CLR--RICH-BLACK}
+  --clr--light: #{$CLR--WHITE}
+
+  h1, h2, h3, h4, h5, h6
+    color: var(--text-color, var(--clr--dark))
 
   &#sec--home
     // WHITE
-    --bg-color: var(--clr-white)
+    --bg-color: #{$CLR--WHITE}
+
     padding: 2rem 4rem
     display: grid
     grid-template-columns: 1fr 1fr
@@ -135,27 +194,8 @@ section
       width: 100%
       border-radius: 2rem
 
-  .panels
-    display: flex
-    gap: 5rem
-    justify-content: center
-    .card
-      background-color: white
-      max-width: 40ch
-      border-radius: 1.2rem
-      box-shadow: 0 0 .2rem black, .5rem .5rem .8rem 0 grey
-      padding: 2rem
-      min-height: 100%
-      display: flex
-      flex-direction: column
-      gap: 2rem
-
-      img
-        margin-top: auto
-        width: 100%
-
   &#sec--about
-    --bg-color: var(--clr-yellow)
+    --bg-color: #{$CLR--VISTA-BLUE}
 
     padding: 2rem 4rem
     display: flex
@@ -167,58 +207,55 @@ section
       gap: 2rem
 
   &#sec--work-experience
-    --bg-color: var(--clr-red)
+    --bg-color: #{$CLR--TEA-GREEN}
 
     padding: 2rem 4rem
     display: flex
     flex-direction: column
     gap: 1rem
     h2
-      color: white
       font-size: 5rem
       display: flex
       gap: 2rem
     h3
-      color: white
       font-weight: 500
 
 
   &#sec--training
-    --bg-color: var(--clr-blue)
+    --bg-color: #{$CLR--VISTA-BLUE}
 
     padding: 2rem 4rem
     display: flex
     flex-direction: column
     gap: 1rem
     h2
-      color: white
       font-size: 5rem
       display: flex
       gap: 2rem
 
   &#sec--gallery
-    --bg-color: var(--clr-grey)
+    --bg-color: #{$CLR--ENGLISH-VIOLET}
+    --text-color: var(--clr--light)
 
     padding: 2rem 4rem
     display: flex
     flex-direction: column
     gap: 1rem
     h2
-      color: white
       font-size: 5rem
       display: flex
       gap: 2rem
 
   &#sec--contact
     // BLACK
-    --bg-color: #000000
+    --bg-color: #{$CLR--RICH-BLACK}
+    --text-color: var(--clr--light)
 
     padding: 2rem 4rem
     display: flex
     flex-direction: column
     gap: 1rem
     h2
-      color: white
       font-size: 5rem
       display: flex
       gap: 2rem

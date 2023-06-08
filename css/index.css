@@ -12,12 +12,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 4rem;
   font-family: "Source Code Pro", monospace;
-  background-color: #C2EABD;
-  --clr-white: #FFFFFF;
-  --clr-grey: #465362;
-  --clr-blue: #011936;
-  --clr-red: hsl(348, 85%, 44%);
-  --clr-yellow: #F9DC5C;
+  background-color: #FFFFFF;
 }
 
 nav {
@@ -33,17 +28,18 @@ nav {
   align-items: center;
   padding: 1rem 2rem;
   background-color: #C2EABD;
-  box-shadow: 0 0.1px 10px grey;
+  border-bottom: 0.2rem solid #9ede96;
+  box-shadow: 0 0.2px 10px grey;
 }
 nav > a {
   font-size: 2rem;
   text-decoration: none;
-  color: hsl(147deg, 40%, 20%);
+  color: #1f4731;
   position: relative;
   transition: color 400ms ease;
 }
 nav > a:hover {
-  color: hsl(147deg, 40%, 50%);
+  color: #2f6b4a;
 }
 nav ul {
   display: flex;
@@ -52,7 +48,7 @@ nav ul {
 }
 nav ul li a {
   text-decoration: none;
-  color: hsl(147deg, 40%, 20%);
+  color: #1f4731;
   position: relative;
 }
 nav ul li a:hover:after {
@@ -66,57 +62,92 @@ nav ul li a:after {
   top: 100.1%;
   left: 0;
   height: 2px;
-  background-color: hsl(147deg, 40%, 20%);
+  background-color: #1f4731;
 }
 
 .sep {
   width: 100%;
   height: var(--height);
-  --height: 2rem;
+  --angle: 2deg;
+  --angle0: 2deg;
+  --anglef: -2deg;
+  --height: calc(100vw * 0.0349207695);
   --from-color: #0ef80e;
   --to-color: #e600ff;
   position: relative;
   overflow-x: hidden;
-  background-color: var(--from-color);
+  overflow-y: hidden;
+  background-color: transparent;
 }
-.sep:after {
-  content: "";
+.sep > div {
   position: absolute;
-  height: 0;
-  width: 0;
-  right: 0;
-  top: 0;
-  border-bottom: var(--height) solid var(--to-color);
+  height: var(--height);
+  width: 111.1111111111vw;
+  top: calc(var(--height) / 2);
+  left: 50%;
+  background-color: var(--to-color);
+  transform-origin: center;
+  translate: -50% 0;
+  box-shadow: 0 0 0.5em 0.03rem #171A21;
+  border-top: 0.1rem solid var(--dark-color);
 }
-.sep.triangle-right:after {
-  border-right: 100vw solid transparent;
+.sep.triangle-left > div {
+  rotate: calc(var(--angle) / 2);
 }
-.sep.triangle-left:after {
-  border-left: 100vw solid transparent;
+.sep.triangle-right > div {
+  rotate: calc(-1 * var(--angle) / 2);
 }
-.sep#sep--yellow-red {
-  --from-color: var(--clr-yellow);
-  --to-color: var(--clr-red);
+.sep#sep--home-about {
+  --dark-color: #7891ff;
+  --to-color: #91A6FF;
 }
-.sep#sep--white-yellow {
-  --from-color: var(--clr-white);
-  --to-color: var(--clr-yellow);
+.sep#sep--about-workexp {
+  --dark-color: #b0e4aa;
+  --to-color: #C2EABD;
 }
-.sep#sep--red-blue {
-  --from-color: var(--clr-red);
-  --to-color: var(--clr-blue);
+.sep#sep--workexp-training {
+  --dark-color: #7891ff;
+  --to-color: #91A6FF;
 }
-.sep#sep--blue-grey {
-  --from-color: var(--clr-blue);
-  --to-color: var(--clr-grey);
+.sep#sep--training-gallery {
+  --dark-color: #312735;
+  --to-color: #3F3244;
+}
+
+.panels {
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
+}
+.panels .card {
+  background-color: white;
+  max-width: 40ch;
+  border-radius: 1.2rem;
+  box-shadow: 0 0 0.2rem black, 0.5rem 0.5rem 0.8rem 0 grey;
+  padding: 2rem;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.panels .card img {
+  margin-top: auto;
+  width: 100%;
 }
 
 section {
+  position: sticky;
+  top: 4rem;
   min-width: 100%;
   background-color: var(--bg-color);
+  --clr--dark: #171A21;
+  --clr--light: #FFFFFF;
+}
+section h1, section h2, section h3, section h4, section h5, section h6 {
+  color: var(--text-color, var(--clr--dark));
 }
 section#sec--home {
-  --bg-color: var(--clr-white);
+  --bg-color: #FFFFFF;
   padding: 2rem 4rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -148,28 +179,8 @@ section#sec--home img {
   width: 100%;
   border-radius: 2rem;
 }
-section .panels {
-  display: flex;
-  gap: 5rem;
-  justify-content: center;
-}
-section .panels .card {
-  background-color: white;
-  max-width: 40ch;
-  border-radius: 1.2rem;
-  box-shadow: 0 0 0.2rem black, 0.5rem 0.5rem 0.8rem 0 grey;
-  padding: 2rem;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-section .panels .card img {
-  margin-top: auto;
-  width: 100%;
-}
 section#sec--about {
-  --bg-color: var(--clr-yellow);
+  --bg-color: #91A6FF;
   padding: 2rem 4rem;
   display: flex;
   flex-direction: column;
@@ -181,57 +192,54 @@ section#sec--about h2 {
   gap: 2rem;
 }
 section#sec--work-experience {
-  --bg-color: var(--clr-red);
+  --bg-color: #C2EABD;
   padding: 2rem 4rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 section#sec--work-experience h2 {
-  color: white;
   font-size: 5rem;
   display: flex;
   gap: 2rem;
 }
 section#sec--work-experience h3 {
-  color: white;
   font-weight: 500;
 }
 section#sec--training {
-  --bg-color: var(--clr-blue);
+  --bg-color: #91A6FF;
   padding: 2rem 4rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 section#sec--training h2 {
-  color: white;
   font-size: 5rem;
   display: flex;
   gap: 2rem;
 }
 section#sec--gallery {
-  --bg-color: var(--clr-grey);
+  --bg-color: #3F3244;
+  --text-color: var(--clr--light);
   padding: 2rem 4rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 section#sec--gallery h2 {
-  color: white;
   font-size: 5rem;
   display: flex;
   gap: 2rem;
 }
 section#sec--contact {
-  --bg-color: #000000;
+  --bg-color: #171A21;
+  --text-color: var(--clr--light);
   padding: 2rem 4rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 section#sec--contact h2 {
-  color: white;
   font-size: 5rem;
   display: flex;
   gap: 2rem;

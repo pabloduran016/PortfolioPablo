@@ -47,34 +47,36 @@ const updateSeparatorsScroll = () => {
     }
 }
 const updateSectionsScroll = () => {
-    const SEC_PADDING_TOP = WINDOW_HEIGHT * 0.35
-    const SEC_PADDING_BOTTOM = WINDOW_HEIGHT * 0.2
+    const SEC_PADDING_TOP = 0.35
+    const SEC_PADDING_BOTTOM = 0.2
     for (const sec of sections) {
         const cards = sec.querySelectorAll('.card')
         if (cards.length === 0) continue
-        const sec_y = sec.getBoundingClientRect().y
-        if (sec_y <= SEC_PADDING_TOP) {
-            const t = 1
-            updateCards(t, cards)
-        }
-        if (sec_y >= WINDOW_HEIGHT - SEC_PADDING_BOTTOM) {
-            const t = 0
-            updateCards(t, cards)
-        }
-        if (sec_y >= SEC_PADDING_TOP && sec_y <= WINDOW_HEIGHT - SEC_PADDING_BOTTOM) {
-            const t = softing((WINDOW_HEIGHT - sec_y - SEC_PADDING_BOTTOM) / (WINDOW_HEIGHT - SEC_PADDING_TOP - SEC_PADDING_BOTTOM) * 3) / 2
-            updateCards(t, cards)
+        for (const card of cards) {
+            const padding_top = Math.max(0, WINDOW_HEIGHT - card.clientHeight) + card.clientHeight * SEC_PADDING_TOP
+            const padding_bottom = card.clientHeight * SEC_PADDING_BOTTOM
+            const card_y = card.getBoundingClientRect().y
+            if (card_y <= padding_top) {
+                const t = 1
+                updateCard(t, card)
+            }
+            if (card_y >= WINDOW_HEIGHT - padding_bottom) {
+                const t = 0
+                updateCard(t, card)
+            }
+            if (card_y >= padding_top && card_y <= WINDOW_HEIGHT - padding_bottom) {
+                const t = softing((WINDOW_HEIGHT - card_y - padding_bottom) / (WINDOW_HEIGHT - padding_top - padding_bottom) * 3) / 2
+                updateCard(t, card)
+            }
         }
     }
 }
-const updateCards = (t, cards) => {
-    for (const card of cards) {
-        const style = getComputedStyle(card)
-        const translate_new = lerp(parseFloat(style.getPropertyValue('--translate0').split('%')[0]), 0, t)
-        const opacity_new = lerp(parseFloat(style.getPropertyValue('--opacity0').split('%')[0]), 1, t)
-        card.style.setProperty('--translate', `${translate_new}% 0`)
-        card.style.setProperty('--opacity', `${opacity_new}`)
-    }
+const updateCard = (t, card) => {
+    const style = getComputedStyle(card)
+    const translate_new = lerp(parseFloat(style.getPropertyValue('--translate0').split('%')[0]), 0, t)
+    const opacity_new = lerp(parseFloat(style.getPropertyValue('--opacity0').split('%')[0]), 1, t)
+    card.style.setProperty('--translate', `${translate_new}% 0`)
+    card.style.setProperty('--opacity', `${opacity_new}`)
 }
 
 

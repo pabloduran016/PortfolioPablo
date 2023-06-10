@@ -8,6 +8,26 @@ const softing = (x) => x**2/2 - x**4/24 + x**6/720 - x**8/40320  // taylor for c
 const updateScroll = () => {
     updateSeparatorsScroll()
     updateSectionsScroll()
+    updateScrollSign()
+}
+const updateScrollSign = () => {
+    const scrollSign = document.querySelector('.scroll-sign')
+    scrollSign.style.setProperty('animation-name', 'none')
+    void scrollSign.offsetWidth;
+    scrollSign.style.setProperty('animation-name', 'appear')
+    const link = document.querySelector('.scroll-sign a')
+    for (const sec of sections) {
+        const sec_y = sec.getBoundingClientRect().y
+        const style = getComputedStyle(sec)
+        const height = parseFloat(style.height.split('px')[0])
+        if (sec_y + height > WINDOW_HEIGHT && sec_y > WINDOW_HEIGHT * 0.5) {
+            const new_ref = `#start--${sec.id.split('sec--')[1]}`
+            link.setAttribute('href', new_ref)
+            link.style.removeProperty('display')
+            return
+        }
+        link.style.display = 'none'
+    }
 }
 const updateSeparatorsScroll = () => {
     // Change angle of separator

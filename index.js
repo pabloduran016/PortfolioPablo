@@ -80,7 +80,6 @@ const updateCard = (t, card) => {
 }
 
 
-updateScroll()
 
 document.addEventListener('scroll', updateScroll)
 
@@ -96,7 +95,11 @@ const adjustOffsets  = () => {
         sec.style.setProperty('--offset', `${offset}px`)
     }
 }
-adjustOffsets()
+
+window.onload = () => {
+    updateScroll()
+    adjustOffsets()
+}
 
 //
 // document.querySelectorAll('nav a').forEach(a => {

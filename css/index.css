@@ -28,7 +28,7 @@ nav {
   align-items: center;
   padding: 1rem 2rem;
   background-color: #C2EABD;
-  border-bottom: 0.2rem solid #9ede96;
+  border-bottom: 0.1rem solid #7ad170;
   box-shadow: 0 0.2px 10px grey;
 }
 nav > a {
@@ -51,10 +51,10 @@ nav ul li a {
   color: #1f4731;
   position: relative;
 }
-nav ul li a:hover:after {
+nav ul li a:hover::after {
   width: 100%;
 }
-nav ul li a:after {
+nav ul li a::after {
   transition: width 400ms ease;
   width: 0;
   content: "";
@@ -68,10 +68,10 @@ nav ul li a:after {
 .sep {
   width: 100%;
   height: var(--height);
-  --angle: 2deg;
-  --angle0: 2deg;
-  --anglef: -2deg;
-  --height: calc(100vw * 0.0349207695);
+  --angle: 5deg;
+  --angle0: 5deg;
+  --anglef: 0deg;
+  --height: calc(100vw * 0.0874886635);
   --from-color: #0ef80e;
   --to-color: #e600ff;
   position: relative;
@@ -98,16 +98,16 @@ nav ul li a:after {
   rotate: calc(-1 * var(--angle) / 2);
 }
 .sep#sep--home-about {
-  --dark-color: #7891ff;
-  --to-color: #91A6FF;
+  --dark-color: #bab2e3;
+  --to-color: #CBC5EA;
 }
 .sep#sep--about-workexp {
   --dark-color: #b0e4aa;
   --to-color: #C2EABD;
 }
 .sep#sep--workexp-training {
-  --dark-color: #7891ff;
-  --to-color: #91A6FF;
+  --dark-color: #bab2e3;
+  --to-color: #CBC5EA;
 }
 .sep#sep--training-gallery {
   --dark-color: #312735;
@@ -129,26 +129,50 @@ nav ul li a:after {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  --translate0: 10%;
+  --translate: var(--translate0);
+  translate: var(--translate);
+  --opacity0: 0;
+  --opacity: var(--opacity0);
+  opacity: var(--opacity);
+}
+.panels .card p {
+  text-align: justify;
 }
 .panels .card img {
   margin-top: auto;
-  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+}
+.panels .card p.image-caption {
+  font-size: 0.8rem;
+  color: grey;
 }
 
 section {
   position: sticky;
-  top: 4rem;
+  --offset: 0rem;
+  top: calc(4rem - var(--offset));
   min-width: 100%;
   background-color: var(--bg-color);
   --clr--dark: #171A21;
   --clr--light: #FFFFFF;
+}
+section::after {
+  content: "";
+  height: calc(100vw * 0.0874886635);
+  background-color: var(--bg-color);
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
 }
 section h1, section h2, section h3, section h4, section h5, section h6 {
   color: var(--text-color, var(--clr--dark));
 }
 section#sec--home {
   --bg-color: #FFFFFF;
-  padding: 2rem 4rem;
+  padding: 4rem 4rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
@@ -180,7 +204,7 @@ section#sec--home img {
   border-radius: 2rem;
 }
 section#sec--about {
-  --bg-color: #91A6FF;
+  --bg-color: #CBC5EA;
   padding: 2rem 4rem;
   display: flex;
   flex-direction: column;
@@ -190,6 +214,9 @@ section#sec--about h2 {
   font-size: 5rem;
   display: flex;
   gap: 2rem;
+}
+section#sec--about img {
+  max-height: 14rem;
 }
 section#sec--work-experience {
   --bg-color: #C2EABD;
@@ -207,7 +234,7 @@ section#sec--work-experience h3 {
   font-weight: 500;
 }
 section#sec--training {
-  --bg-color: #91A6FF;
+  --bg-color: #CBC5EA;
   padding: 2rem 4rem;
   display: flex;
   flex-direction: column;
@@ -243,6 +270,9 @@ section#sec--contact h2 {
   font-size: 5rem;
   display: flex;
   gap: 2rem;
+}
+section#sec--contact h4 {
+  color: #171A21;
 }
 section#sec--contact .panels .card {
   width: 30ch;

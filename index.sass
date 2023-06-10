@@ -13,6 +13,7 @@ $CLR--TEA-GREEN: #C2EABD
 $CLR--BRUNSKWICK-GREEN: #1f4731
 $CLR--WHITE: #FFFFFF
 $CLR--VISTA-BLUE: #91A6FF
+$CLR--PERIWINKLE: #CBC5EA
 $CLR--RICH-BLACK: #171A21
 $CLR--ENGLISH-VIOLET: #3F3244
 
@@ -45,7 +46,7 @@ nav
   align-items: center
   padding: 1rem 2rem
   background-color: $CLR--TEA-GREEN
-  border-bottom: .2rem solid darken($CLR--TEA-GREEN, 10%)
+  border-bottom: .1rem solid darken($CLR--TEA-GREEN, 20%)
   box-shadow: 0 .2px 10px grey
   > a
     font-size: 2rem
@@ -65,9 +66,9 @@ nav
         color: $CLR--BRUNSKWICK-GREEN
         position: relative
         &:hover
-          &:after
+          &::after
             width: 100%
-        &:after
+        &::after
           transition: width 400ms ease
           width: 0
           content: ''
@@ -78,8 +79,8 @@ nav
           background-color: $CLR--BRUNSKWICK-GREEN
 
 
-$SEP-ANGLE0: 2deg
-$SEP-ANGLEF: -2deg
+$SEP-ANGLE0: 5deg
+$SEP-ANGLEF: 0deg
 
 
 .sep
@@ -118,18 +119,18 @@ $SEP-ANGLEF: -2deg
 
   &#sep--home-about
     //--from-color: #{$CLR--WHITE}
-    --dark-color: #{darken($CLR--VISTA-BLUE, 5%)}
-    --to-color: #{$CLR--VISTA-BLUE}
+    --dark-color: #{darken($CLR--PERIWINKLE, 5%)}
+    --to-color: #{$CLR--PERIWINKLE}
   &#sep--about-workexp
-    //--from-color: #{$CLR--VISTA-BLUE}
+    //--from-color: #{$CLR--PERIWINKLE}
     --dark-color: #{darken($CLR--TEA-GREEN, 5%)}
     --to-color: #{$CLR--TEA-GREEN}
   &#sep--workexp-training
     //--from-color: #{$CLR--TEA-GREEN}
-    --dark-color: #{darken($CLR--VISTA-BLUE, 5%)}
-    --to-color: #{$CLR--VISTA-BLUE}
+    --dark-color: #{darken($CLR--PERIWINKLE, 5%)}
+    --to-color: #{$CLR--PERIWINKLE}
   &#sep--training-gallery
-    //--from-color: #{$CLR--VISTA-BLUE}
+    //--from-color: #{$CLR--PERIWINKLE}
     --dark-color: #{darken($CLR--ENGLISH-VIOLET, 5%)}
     --to-color: #{$CLR--ENGLISH-VIOLET}
 
@@ -148,15 +149,41 @@ $SEP-ANGLEF: -2deg
     flex-direction: column
     gap: 2rem
 
+    --translate0: 10%
+    --translate: var(--translate0)
+    translate: var(--translate)
+
+    --opacity0: 0
+    --opacity: var(--opacity0)
+    opacity: var(--opacity)
+
+    p
+      text-align: justify
+
     img
       margin-top: auto
-      width: 100%
+      max-width: 100%
+      margin-inline: auto
+
+    p.image-caption
+      font-size: .8rem
+      color: grey
 
 section
   position: sticky
-  top: $NAV-HEIGHT
-
+  --offset: 0rem
+  top: calc(#{$NAV-HEIGHT} - var(--offset))
   min-width: 100%
+
+  &::after
+    content: ''
+    height: calc(100vw * #{ math.tan($SEP-ANGLE0) })
+    background-color: var(--bg-color)
+    width: 100%
+    position: absolute
+    top: 100%
+    left: 0
+
   background-color: var(--bg-color)
   --clr--dark: #{$CLR--RICH-BLACK}
   --clr--light: #{$CLR--WHITE}
@@ -167,8 +194,7 @@ section
   &#sec--home
     // WHITE
     --bg-color: #{$CLR--WHITE}
-
-    padding: 2rem 4rem
+    padding: 4rem 4rem
     display: grid
     grid-template-columns: 1fr 1fr
     gap: 4rem
@@ -195,8 +221,7 @@ section
       border-radius: 2rem
 
   &#sec--about
-    --bg-color: #{$CLR--VISTA-BLUE}
-
+    --bg-color: #{$CLR--PERIWINKLE}
     padding: 2rem 4rem
     display: flex
     flex-direction: column
@@ -206,9 +231,11 @@ section
       display: flex
       gap: 2rem
 
+    img
+      max-height: 14rem
+
   &#sec--work-experience
     --bg-color: #{$CLR--TEA-GREEN}
-
     padding: 2rem 4rem
     display: flex
     flex-direction: column
@@ -222,8 +249,7 @@ section
 
 
   &#sec--training
-    --bg-color: #{$CLR--VISTA-BLUE}
-
+    --bg-color: #{$CLR--PERIWINKLE}
     padding: 2rem 4rem
     display: flex
     flex-direction: column
@@ -259,6 +285,8 @@ section
       font-size: 5rem
       display: flex
       gap: 2rem
+    h4
+      color: $CLR--RICH-BLACK
 
     .panels
       .card

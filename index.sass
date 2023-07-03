@@ -96,11 +96,13 @@ $SEP-ANGLEF: 0deg
   --height: calc(100vw * #{ math.tan($SEP-ANGLE0) })
   --from-color: #0ef80e
   --to-color: #e600ff
-  position: relative
   overflow-x: hidden
   overflow-y: hidden
   background-color: transparent
   //background-color: var(--from-color)
+  --offset: 0rem
+  position: sticky
+  top: calc(#{$NAV-HEIGHT} - var(--offset))
 
   > div
     position: absolute

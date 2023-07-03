@@ -1,5 +1,6 @@
 const seps = document.querySelectorAll('.sep')
 const sections = document.querySelectorAll('section')
+const separators = document.querySelectorAll('.sep')
 const WINDOW_HEIGHT = window.innerHeight
 
 const lerp = (start, end, t) => start + (end - start) * t
@@ -87,12 +88,19 @@ document.addEventListener('scroll', updateScroll)
 const adjustOffsets  = () => {
     const main_nav = document.querySelector('nav')
     const nav_height = parseFloat(getComputedStyle(main_nav).height.split('px')[0])
-    for (const sec of sections) {
+    const offsets = []
+    for (const [i, sec] of sections.entries()) {
         const style = getComputedStyle(sec)
         const height = parseFloat(style.height.split('px')[0])
         const offset = Math.max(0, height - WINDOW_HEIGHT + nav_height)
         console.log(height, WINDOW_HEIGHT - nav_height, offset)
         sec.style.setProperty('--offset', `${offset}px`)
+        if (i - 1 < 0 || i - 1 >= separators.length) continue
+        const sep = separators[i-1]
+        const sep_style = getComputedStyle(sep)
+        const sep_height = parseFloat(sep_style.height.split('px')[0])
+        console.log(sep, offset)
+        sep?.style.setProperty('--offset', `${offset + sep_height}px`)
     }
 }
 let boards

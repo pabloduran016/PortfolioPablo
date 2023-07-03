@@ -95,10 +95,22 @@ const adjustOffsets  = () => {
         sec.style.setProperty('--offset', `${offset}px`)
     }
 }
+let boards
+const addBoardIndicators = () => {
+    const boardIndicator = document.querySelector('.board-indicator')
+     boards = boardIndicator.parentElement.querySelector('.boards').children
+    boards.forEach((e, i) => {
+        boardIndicator.innerHTML += `
+            <div class="indicator-${i}"></div>
+        `
+    })
+}
+
 
 window.onload = () => {
     updateScroll()
     adjustOffsets()
+    addBoardIndicators()
 }
 
 //

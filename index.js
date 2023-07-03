@@ -98,7 +98,8 @@ const adjustOffsets  = () => {
 let boards
 const addBoardIndicators = () => {
     const boardIndicator = document.querySelector('.board-indicator')
-     boards = boardIndicator.parentElement.querySelector('.boards').children
+    if (boardIndicator === null) return
+    boards = boardIndicator.parentElement.querySelector('.boards').children
     boards.forEach((e, i) => {
         boardIndicator.innerHTML += `
             <div class="indicator-${i}"></div>

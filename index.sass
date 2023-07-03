@@ -57,6 +57,7 @@ nav
     color: $CLR--BRUNSKWICK-GREEN
     position: relative
     transition: color 400ms ease
+    font-weight: 600
     &:hover
       color: lighten($CLR--BRUNSKWICK-GREEN, 10%)
   ul
@@ -134,8 +135,8 @@ $SEP-ANGLEF: 0deg
     --to-color: #{$CLR--PERIWINKLE}
   &#sep--training-gallery
     //--from-color: #{$CLR--PERIWINKLE}
-    --dark-color: #{darken($CLR--ENGLISH-VIOLET, 5%)}
-    --to-color: #{$CLR--ENGLISH-VIOLET}
+    --dark-color: #{darken($CLR--TEA-GREEN, 5%)}
+    --to-color: #{$CLR--TEA-GREEN}
 
 .panels
   display: flex
@@ -271,6 +272,9 @@ section
       gap: 2rem
     h3
       font-weight: 500
+    .panels
+      .card
+        flex-basis: 50%
 
 
   &#sec--training
@@ -285,8 +289,8 @@ section
       gap: 2rem
 
   &#sec--gallery
-    --bg-color: #{$CLR--ENGLISH-VIOLET}
-    --text-color: var(--clr--light)
+    --bg-color: #{$CLR--TEA-GREEN}
+    --text-color: var(--clr--dark)
 
     padding: 2rem 4rem
     display: flex
@@ -390,7 +394,7 @@ section
   animation-name: appear
   animation-duration: 500ms
   animation-fill-mode: forwards
-  animation-delay: 4s
+  animation-delay: 2s
   @keyframes appear
     0%
       opacity: 0

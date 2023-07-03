@@ -41,6 +41,7 @@ nav > a {
   color: #1f4731;
   position: relative;
   transition: color 400ms ease;
+  font-weight: 600;
 }
 nav > a:hover {
   color: #2f6b4a;
@@ -114,8 +115,8 @@ nav ul li a::after {
   --to-color: #CBC5EA;
 }
 .sep#sep--training-gallery {
-  --dark-color: #312735;
-  --to-color: #3F3244;
+  --dark-color: #b0e4aa;
+  --to-color: #C2EABD;
 }
 
 .panels {
@@ -272,6 +273,9 @@ section#sec--work-experience h2 {
 section#sec--work-experience h3 {
   font-weight: 500;
 }
+section#sec--work-experience .panels .card {
+  flex-basis: 50%;
+}
 section#sec--training {
   --bg-color: #CBC5EA;
   padding: 2rem 4rem;
@@ -285,8 +289,8 @@ section#sec--training h2 {
   gap: 2rem;
 }
 section#sec--gallery {
-  --bg-color: #3F3244;
-  --text-color: var(--clr--light);
+  --bg-color: #C2EABD;
+  --text-color: var(--clr--dark);
   padding: 2rem 4rem;
   display: flex;
   flex-direction: column;
@@ -406,7 +410,7 @@ section#sec--contact .panels .card#card--email #copied, section#sec--contact .pa
   animation-name: appear;
   animation-duration: 500ms;
   animation-fill-mode: forwards;
-  animation-delay: 4s;
+  animation-delay: 2s;
 }
 @keyframes appear {
   0% {

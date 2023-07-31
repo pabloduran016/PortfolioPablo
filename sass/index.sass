@@ -1,0 +1,543 @@
+@use "sass:math"
+
+*
+  padding: 0
+  margin: 0
+  box-sizing: border-box
+
+img
+  display: block
+
+
+$CLR--TEA-GREEN: #C2EABD
+$CLR--BRUNSKWICK-GREEN: #1f4731
+$CLR--WHITE: #FFFFFF
+$CLR--VISTA-BLUE: #91A6FF
+$CLR--PERIWINKLE: #CBC5EA
+$CLR--RICH-BLACK: #171A21
+$CLR--ENGLISH-VIOLET: #3F3244
+$CLR--ROSE-EBONY: #63474D
+$CLR--OLD-ROSE: #AA767C
+$CLR--MINT-GREEN: #C2E7D9
+$CLR--LIGHT-BLUE: #A6CFD5
+
+//$CLR--GREEN: #C2EABD
+//$CLR--WHITE: #FFFFFF
+//$CLR--GREY: #465362
+//$CLR--BLUE: #011936
+//$CLR--RED: #d01137
+//$CLR--YELLOW: #F9DC5C
+
+$NAV-HEIGHT: 4rem
+
+@import "./source_code_font.sass"
+
+html
+  scroll-behavior: smooth
+  scroll-padding-top: $NAV-HEIGHT
+  font-family: SourceCodePro, monospace
+  background-color: $CLR--WHITE
+
+body
+  overflow-x: hidden
+
+nav
+  z-index: 100
+  position: sticky
+  top: 0
+  right: 0
+  min-width: 100%
+  min-height: $NAV-HEIGHT
+  max-height: $NAV-HEIGHT
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 1rem 2rem
+  background-color: $CLR--TEA-GREEN
+  border-bottom: .1rem solid darken($CLR--TEA-GREEN, 20%)
+  box-shadow: 0 .2px 10px grey
+  > a
+    font-size: 2rem
+    text-decoration: none
+    color: $CLR--BRUNSKWICK-GREEN
+    position: relative
+    transition: color 400ms ease
+    font-weight: 600
+    &:hover
+      color: lighten($CLR--BRUNSKWICK-GREEN, 10%)
+  ul
+    display: flex
+    gap: 2rem
+    list-style: none
+    li
+      a
+        text-decoration: none
+        color: $CLR--BRUNSKWICK-GREEN
+        position: relative
+        &:hover
+          &::after
+            width: 100%
+        &::after
+          transition: width 400ms ease
+          width: 0
+          content: ''
+          position: absolute
+          top: 100.1%
+          left: 0
+          height: 2px
+          background-color: $CLR--BRUNSKWICK-GREEN
+
+
+$SEP-ANGLE0: 5deg
+$SEP-ANGLEF: 0deg
+
+
+.sep
+  width: 100%
+  height: var(--height)
+  --angle: #{$SEP-ANGLE0}
+  --angle0: #{$SEP-ANGLE0}
+  --anglef: #{$SEP-ANGLEF}
+  --height: calc(100vw * #{ math.tan($SEP-ANGLE0) })
+  --from-color: #0ef80e
+  --to-color: #e600ff
+  overflow-x: hidden
+  overflow-y: hidden
+  background-color: transparent
+  //background-color: var(--from-color)
+  --offset: 0rem
+  position: sticky
+  top: calc(#{$NAV-HEIGHT} - var(--offset))
+
+  > div
+    position: absolute
+    height: var(--height)
+    width: calc(100vw / 0.9)
+    top: calc(var(--height) / 2)
+    left: 50%
+    background-color: var(--to-color)
+    transform-origin: center
+    translate: -50% 0
+    box-shadow: 0 0 .5em .03rem $CLR--RICH-BLACK
+    border-top: .1rem solid var(--dark-color)
+
+  &.triangle-left
+    > div
+      rotate: calc(var(--angle) / 2)
+  &.triangle-right
+    > div
+      rotate: calc(-1 * var(--angle) / 2)
+
+  &#sep--home-about
+    //--from-color: #{$CLR--WHITE}
+    --dark-color: #{darken($CLR--MINT-GREEN, 5%)}
+    --to-color: #{$CLR--MINT-GREEN}
+  &#sep--about-workexp
+    //--from-color: #{$CLR--PERIWINKLE}
+    --dark-color: #{darken($CLR--LIGHT-BLUE, 5%)}
+    --to-color: #{$CLR--LIGHT-BLUE}
+  &#sep--workexp-training
+    //--from-color: #{$CLR--TEA-GREEN}
+    --dark-color: #{darken($CLR--PERIWINKLE, 5%)}
+    --to-color: #{$CLR--PERIWINKLE}
+  &#sep--training-gallery
+    //--from-color: #{$CLR--PERIWINKLE}
+    --dark-color: #{darken($CLR--TEA-GREEN, 5%)}
+    --to-color: #{$CLR--TEA-GREEN}
+  &#sep--gallery-contact
+    //--from-color: #{$CLR--PERIWINKLE}
+    --dark-color: #{darken($CLR--RICH-BLACK, 5%)}
+    --to-color: #{$CLR--RICH-BLACK}
+
+.panels
+  display: flex
+  justify-content: center
+  gap: 2vw
+
+  @media screen and (max-device-width: 800px)
+    flex-direction: column
+    gap: 1rem
+
+  .card
+    background-color: white
+    @media screen and (max-device-width: 800px)
+      max-width: 90%
+      margin-inline: auto
+
+    border-radius: 1.2rem
+    box-shadow: 0 0 .2rem black, .5rem .5rem .8rem 0 grey
+    padding: 2rem
+    min-height: 100%
+    display: flex
+    flex-direction: column
+    gap: 2rem
+
+    --translate0: 5%
+    --translate: var(--translate0)
+    translate: var(--translate)
+
+    --opacity0: 0
+    --opacity: var(--opacity0)
+    opacity: var(--opacity)
+    --text-opacity0: 0
+    --text-opacity: var(--opacity0)
+    > h4, > p
+      opacity: var(--text-opacity)
+    h4
+      font-size: 1.5rem
+    p
+      text-align: justify
+      strong
+        font-size: 1.1rem
+    img
+      margin-top: auto
+      max-width: 100%
+      margin-inline: auto
+
+    p.image-caption
+      font-size: .8rem
+      color: grey
+
+
+.sliders
+  .boards
+    padding: 2rem
+    max-width: 100%
+    min-height: 80vh
+    display: grid
+    grid-template-areas: "board"
+
+    .board
+      min-width: 100%
+      max-width: 100%
+      min-height: 100%
+      max-height: 100%
+
+      grid-area: board
+      opacity: 0
+      transition: opacity ease 200ms
+
+      background-color: white
+      border-radius: .4rem
+      box-shadow: 0 0 .1rem black, 0 0 .3rem grey
+      padding: 2rem
+
+      display: flex
+      flex-direction: row
+      gap: 2rem
+
+      .text
+        max-width: 50%
+        display: flex
+        flex-direction: column
+        gap: 2rem
+        h4
+          font-size: 3rem
+          color: var(--dark-color)
+        p
+          font-size: 1rem
+
+
+      .image-carousel
+        display: flex
+        flex-direction: row
+        //overflow-x: hidden
+        max-width: 50%
+        margin-inline: auto
+        img
+          max-width: 100%
+          gap: 1rem
+  .arrows
+    padding: 1rem
+    display: flex
+    justify-content: center
+    align-items: center
+    gap: 3rem
+    flex-direction: row
+    .arrow-right, .arrow-left
+      background-color: transparent
+      border: none
+      transition: ease 200ms
+      opacity: 1
+      &.disabled
+        opacity: 0.3
+      &:not(.disabled)
+        opacity: 1
+        &:hover, &:focus
+          scale: 1.1
+        &:active
+          opacity: 0.3
+      img
+        width: 5rem
+    .arrow-right
+      rotate: 180deg
+    .board-indicator
+      display: flex
+      flex-direction: row
+      gap: 1rem
+      .indicator
+        width: 1rem
+        border-radius: 50%
+        height: 1rem
+        &:not(.active)
+          background-color: darkgray
+        &.active
+          background-color: white
+
+section
+  position: sticky
+  --offset: 0rem
+  top: calc(#{$NAV-HEIGHT} - var(--offset))
+  min-width: 100%
+
+  &:not(:last-of-type)::after
+    content: ''
+    height: calc(100vw * #{ math.tan($SEP-ANGLE0) })
+    background-color: var(--bg-color)
+    width: 100%
+    position: absolute
+    top: 100%
+    left: 0
+
+  background-color: var(--bg-color)
+  --clr--dark: #{$CLR--RICH-BLACK}
+  --clr--light: #{$CLR--WHITE}
+
+  h1, h2, h3, h4, h5, h6
+    color: var(--text-color, var(--clr--dark))
+
+  &#sec--home
+    // WHITE
+    --bg-color: #{$CLR--WHITE}
+    padding: 4rem 4rem
+    display: grid
+
+    grid-template-columns: 1fr 1fr
+    @media screen and (max-device-width: 800px)
+      grid-template-columns: 1fr
+      gap: 0
+
+    gap: 4rem
+    justify-content: center
+    .left
+      padding-block: 6rem
+      padding-inline: 2rem
+      @media screen and (max-device-width: 800px)
+        padding-block: 1rem
+        padding-inline: 2rem
+      display: flex
+      flex-direction: column
+      gap: 3rem
+      h1
+        display: block
+        font-size: 12vw
+        line-height: 8rem
+      h3
+        padding-left: .5rem
+        font-weight: 400
+    .right
+      display: flex
+      justify-content: center
+      align-items: center
+      @media screen and (max-device-width: 800px)
+        width: 100%
+        img
+          width: 90%
+    img
+      margin-inline: auto
+      width: 100%
+      border-radius: 2rem
+      box-shadow: black 0 0 .3rem
+
+  &#sec--about
+    --bg-color: #{$CLR--MINT-GREEN}
+    padding: 2rem 2rem 4rem
+    display: flex
+    flex-direction: column
+    gap: 1rem
+    h2
+      font-size: 5rem
+      display: flex
+      gap: 2rem
+
+    img
+      max-height: 14rem
+
+  &#sec--work-experience
+    --bg-color: #{$CLR--LIGHT-BLUE}
+    padding: 2rem 2rem 4rem
+    display: flex
+    flex-direction: column
+    gap: 1rem
+    h2
+      font-size: 5rem
+      display: flex
+      gap: 2rem
+    h3
+      font-weight: 500
+    .panels
+      .card
+        flex-basis: 50%
+
+
+  &#sec--training
+    --bg-color: #{$CLR--PERIWINKLE}
+    padding: 2rem 2rem 4rem
+    display: flex
+    flex-direction: column
+    gap: 1rem
+    h2
+      font-size: 5rem
+      display: flex
+      gap: 2rem
+
+    .panels
+      .card
+        flex-basis: 50%
+
+  &#sec--gallery
+    --bg-color: #{$CLR--TEA-GREEN}
+    --text-color: var(--clr--dark)
+
+    padding: 2rem 2rem 4rem
+    display: flex
+    flex-direction: column
+    gap: 1rem
+    h2
+      font-size: 5rem
+      display: flex
+      gap: 2rem
+
+  &#sec--contact
+    // BLACK
+    --bg-color: #{$CLR--RICH-BLACK}
+    --text-color: var(--clr--light)
+
+    padding: 2rem 2rem 4rem
+    display: flex
+    flex-direction: column
+    gap: 1rem
+    h2
+      font-size: 5rem
+      display: flex
+      gap: 2rem
+    h4
+      color: $CLR--RICH-BLACK
+
+    .panels
+      @media screen and (max-device-width: 800px)
+        flex-direction: row
+        flex-wrap: wrap
+      .card
+        width: 30ch
+        @media screen and (max-device-width: 800px)
+          width: 30%
+        &#card--github
+          a
+            background-color: black
+            display: flex
+            align-items: center
+            justify-content: center
+            border-radius: 50%
+            aspect-ratio: 1
+            position: relative
+            transition: opacity 400ms ease
+            &:hover, &:focus
+              opacity: 0.8
+            &:active
+              opacity: 0.5
+            img#profile-pic
+              margin: 0
+              aspect-ratio: 1
+              width: 98%
+              border-radius: 50%
+            div#github-logo
+              position: absolute
+              bottom: 0
+              right: 0
+              background-color: white
+              border-radius: 50%
+              img
+                margin: 0
+        &#card--email, &#card--cv
+          a
+            margin-block: auto
+            position: relative
+            display: flex
+            flex-direction: column
+            p
+              position: absolute
+              top: 50%
+              left: 50%
+              transform: translate(-50%, -50%)
+              font-size: 2rem
+              z-index: 2
+              opacity: 0
+              color: black
+              transition: opacity 400ms ease
+            img
+              width: 100%
+              margin-top: auto
+              opacity: 1
+              transition: opacity 400ms ease
+            &:hover, &:focus
+              img
+                opacity: 0.5
+              p
+                opacity: 1
+            &:active
+              img
+                opacity: 0.3
+              p
+                opacity: 1
+          #copied, #downloaded
+            display: none
+
+.scroll-sign
+  position: fixed
+  bottom: 1rem
+  width: 100%
+  visibility: hidden
+  animation-name: appear
+  animation-duration: 500ms
+  animation-fill-mode: forwards
+  animation-delay: 2s
+  @keyframes appear
+    0%
+      opacity: 0
+    100%
+      visibility: visible
+      opacity: 1
+  a
+    margin-inline: auto
+    flex-direction: column
+    text-decoration: none
+
+    > p
+      color: #898989
+      width: 7rem
+      margin-inline: auto
+      text-align: center
+      margin-bottom: -.5rem
+
+    > img
+      margin-bottom: -1rem
+      width: 7rem
+      height: 2rem
+      margin-inline: auto
+
+    @keyframes scroll-sign
+      0%
+        opacity: 50%
+      50%
+        opacity: 100%
+
+
+    @for $i from 1 through 3
+        > img:nth-child(#{$i})
+          animation-duration: 1000ms
+          animation-timing-function: ease
+          animation-delay: calc(#{$i} * 100ms)
+          animation-iteration-count: infinite
+          animation-direction: alternate-reverse
+          animation-name: scroll-sign

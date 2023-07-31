@@ -8,10 +8,98 @@ img {
   display: block;
 }
 
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 200;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-ExtraLight.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 300;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-Light.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 400;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-Regular.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 500;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-Medium.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 600;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-SemiBold.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 700;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-Bold.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 800;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-ExtraBold.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 900;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-Black.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 200;
+  font-style: italic;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-ExtraLightItalic.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 300;
+  font-style: italic;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-LightItalic.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 400;
+  font-style: italic;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-Italic.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 500;
+  font-style: italic;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-MediumItalic.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 600;
+  font-style: italic;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-SemiBoldItalic.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 700;
+  font-style: italic;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-BoldItalic.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 800;
+  font-style: italic;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-ExtraBoldItalic.ttf);
+}
+@font-face {
+  font-family: SourceCodePro;
+  font-weight: 900;
+  font-style: italic;
+  src: url(../assets/fonts/Source_Code_Pro/static/SourceCodePro-BlackItalic.ttf);
+}
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 4rem;
-  font-family: "Source Code Pro", monospace;
+  font-family: SourceCodePro, monospace;
   background-color: #FFFFFF;
 }
 
@@ -105,12 +193,12 @@ nav ul li a::after {
   rotate: calc(-1 * var(--angle) / 2);
 }
 .sep#sep--home-about {
-  --dark-color: #bab2e3;
-  --to-color: #CBC5EA;
+  --dark-color: #b0e0ce;
+  --to-color: #C2E7D9;
 }
 .sep#sep--about-workexp {
-  --dark-color: #b0e4aa;
-  --to-color: #C2EABD;
+  --dark-color: #95c6cd;
+  --to-color: #A6CFD5;
 }
 .sep#sep--workexp-training {
   --dark-color: #bab2e3;
@@ -119,6 +207,10 @@ nav ul li a::after {
 .sep#sep--training-gallery {
   --dark-color: #b0e4aa;
   --to-color: #C2EABD;
+}
+.sep#sep--gallery-contact {
+  --dark-color: #0d0e12;
+  --to-color: #171A21;
 }
 
 .panels {
@@ -141,12 +233,14 @@ nav ul li a::after {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  --translate0: 10%;
+  --translate0: 5%;
   --translate: var(--translate0);
   translate: var(--translate);
   --opacity0: 0;
   --opacity: var(--opacity0);
   opacity: var(--opacity);
+  --text-opacity0: 0;
+  --text-opacity: var(--opacity0);
 }
 @media screen and (max-device-width: 800px) {
   .panels .card {
@@ -154,11 +248,17 @@ nav ul li a::after {
     margin-inline: auto;
   }
 }
+.panels .card > h4, .panels .card > p {
+  opacity: var(--text-opacity);
+}
 .panels .card h4 {
   font-size: 1.5rem;
 }
 .panels .card p {
   text-align: justify;
+}
+.panels .card p strong {
+  font-size: 1.1rem;
 }
 .panels .card img {
   margin-top: auto;
@@ -171,14 +271,23 @@ nav ul li a::after {
 }
 
 .sliders .boards {
-  display: flex;
+  padding: 2rem;
   max-width: 100%;
+  min-height: 80vh;
+  display: grid;
+  grid-template-areas: "board";
 }
 .sliders .boards .board {
   min-width: 100%;
   max-width: 100%;
   min-height: 100%;
   max-height: 100%;
+  grid-area: board;
+  opacity: 0;
+  transition: opacity ease 200ms;
+  background-color: white;
+  border-radius: 0.4rem;
+  box-shadow: 0 0 0.1rem black, 0 0 0.3rem grey;
   padding: 2rem;
   display: flex;
   flex-direction: row;
@@ -195,18 +304,65 @@ nav ul li a::after {
   color: var(--dark-color);
 }
 .sliders .boards .board .text p {
-  font-size: 2rem;
+  font-size: 1rem;
 }
 .sliders .boards .board .image-carousel {
   display: flex;
   flex-direction: row;
-  overflow-x: hidden;
   max-width: 50%;
   margin-inline: auto;
 }
 .sliders .boards .board .image-carousel img {
   max-width: 100%;
-  gap: 2rem;
+  gap: 1rem;
+}
+.sliders .arrows {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-direction: row;
+}
+.sliders .arrows .arrow-right, .sliders .arrows .arrow-left {
+  background-color: transparent;
+  border: none;
+  transition: ease 200ms;
+  opacity: 1;
+}
+.sliders .arrows .arrow-right.disabled, .sliders .arrows .arrow-left.disabled {
+  opacity: 0.3;
+}
+.sliders .arrows .arrow-right:not(.disabled), .sliders .arrows .arrow-left:not(.disabled) {
+  opacity: 1;
+}
+.sliders .arrows .arrow-right:not(.disabled):hover, .sliders .arrows .arrow-right:not(.disabled):focus, .sliders .arrows .arrow-left:not(.disabled):hover, .sliders .arrows .arrow-left:not(.disabled):focus {
+  scale: 1.1;
+}
+.sliders .arrows .arrow-right:not(.disabled):active, .sliders .arrows .arrow-left:not(.disabled):active {
+  opacity: 0.3;
+}
+.sliders .arrows .arrow-right img, .sliders .arrows .arrow-left img {
+  width: 5rem;
+}
+.sliders .arrows .arrow-right {
+  rotate: 180deg;
+}
+.sliders .arrows .board-indicator {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.sliders .arrows .board-indicator .indicator {
+  width: 1rem;
+  border-radius: 50%;
+  height: 1rem;
+}
+.sliders .arrows .board-indicator .indicator:not(.active) {
+  background-color: darkgray;
+}
+.sliders .arrows .board-indicator .indicator.active {
+  background-color: white;
 }
 
 section {
@@ -283,10 +439,11 @@ section#sec--home img {
   margin-inline: auto;
   width: 100%;
   border-radius: 2rem;
+  box-shadow: black 0 0 0.3rem;
 }
 section#sec--about {
-  --bg-color: #CBC5EA;
-  padding: 2rem 4rem;
+  --bg-color: #C2E7D9;
+  padding: 2rem 2rem 4rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -300,8 +457,8 @@ section#sec--about img {
   max-height: 14rem;
 }
 section#sec--work-experience {
-  --bg-color: #C2EABD;
-  padding: 2rem 4rem;
+  --bg-color: #A6CFD5;
+  padding: 2rem 2rem 4rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -319,7 +476,7 @@ section#sec--work-experience .panels .card {
 }
 section#sec--training {
   --bg-color: #CBC5EA;
-  padding: 2rem 4rem;
+  padding: 2rem 2rem 4rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -329,10 +486,13 @@ section#sec--training h2 {
   display: flex;
   gap: 2rem;
 }
+section#sec--training .panels .card {
+  flex-basis: 50%;
+}
 section#sec--gallery {
   --bg-color: #C2EABD;
   --text-color: var(--clr--dark);
-  padding: 2rem 4rem;
+  padding: 2rem 2rem 4rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -345,7 +505,7 @@ section#sec--gallery h2 {
 section#sec--contact {
   --bg-color: #171A21;
   --text-color: var(--clr--light);
-  padding: 2rem 4rem;
+  padding: 2rem 2rem 4rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;

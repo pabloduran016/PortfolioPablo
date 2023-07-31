@@ -76,8 +76,10 @@ const updateCard = (t, card) => {
     const style = getComputedStyle(card)
     const translate_new = lerp(parseFloat(style.getPropertyValue('--translate0').split('%')[0]), 0, t)
     const opacity_new = lerp(parseFloat(style.getPropertyValue('--opacity0').split('%')[0]), 1, t)
+    const text_opacity_new = lerp(parseFloat(style.getPropertyValue('--text-opacity0').split('%')[0]), 1, t**5)
     card.style.setProperty('--translate', `${translate_new}% 0`)
     card.style.setProperty('--opacity', `${opacity_new}`)
+    card.style.setProperty('--text-opacity', `${text_opacity_new}`)
 }
 
 
@@ -103,16 +105,51 @@ const adjustOffsets  = () => {
         sep?.style.setProperty('--offset', `${offset + sep_height}px`)
     }
 }
-let boards
+let current_board = 0
 const addBoardIndicators = () => {
     const boardIndicator = document.querySelector('.board-indicator')
     if (boardIndicator === null) return
-    boards = boardIndicator.parentElement.querySelector('.boards').children
-    boards.forEach((e, i) => {
+    const boards = document.querySelectorAll('#sec--gallery .boards > .board')
+    for (const e of boards) {
         boardIndicator.innerHTML += `
-            <div class="indicator-${i}"></div>
+            <div class="indicator"></div>
         `
-    })
+    }
+    changeBoard(current_board, current_board, boards)
+    updateArrowColor(current_board, boards)
+}
+
+const configureGalleryArrows = () => {
+    const left_arrow = document.querySelector('#sec--gallery .arrow-left')
+    const right_arrow = document.querySelector('#sec--gallery .arrow-right')
+    const boards = document.querySelectorAll('#sec--gallery .boards > .board')
+    left_arrow.onclick = () => {
+        current_board -= 1
+        changeBoard(current_board + 1, current_board, boards)
+        updateArrowColor(current_board, boards)
+    }
+    right_arrow.onclick = () => {
+        current_board += 1
+        changeBoard(current_board - 1, current_board, boards)
+        updateArrowColor(current_board, boards)
+    }
+}
+const changeBoard = (board0, boardf, boards) => {
+    if (boardf < 0) current_board = boardf = 0
+    if (boardf >= boards.length) current_board = boardf = boards.length - 1
+    boards[board0].style.setProperty('opacity', 0)
+    boards[boardf].style.setProperty('opacity', 1)
+    document.querySelectorAll('.board-indicator > .indicator')[board0].classList.remove('active')
+    document.querySelectorAll('.board-indicator > .indicator')[boardf].classList.add('active')
+}
+const updateArrowColor = (current_board, boards) => {
+    document.querySelector('#sec--gallery .arrow-right').classList.remove('disabled')
+    document.querySelector('#sec--gallery .arrow-left').classList.remove('disabled')
+    if (current_board === 0) {
+        document.querySelector('#sec--gallery .arrow-left').classList.add('disabled')
+    } else if (current_board === boards.length - 1) {
+        document.querySelector('#sec--gallery .arrow-right').classList.add('disabled')
+    }
 }
 
 
@@ -120,6 +157,7 @@ window.onload = () => {
     updateScroll()
     adjustOffsets()
     addBoardIndicators()
+    configureGalleryArrows()
 }
 
 //

@@ -105,41 +105,52 @@ const adjustOffsets  = () => {
         sep?.style.setProperty('--offset', `${offset + sep_height}px`)
     }
 }
-let current_board = 0
-const addBoardIndicators = () => {
-    const boardIndicator = document.querySelector('#board-arrows > .board-indicator')
-    const boards = document.querySelectorAll('#sec--gallery .boards > .board')
+
+const addBoardIndicators = (slider) => {
+    const boardIndicator = slider.querySelector('[data-board-arrows] > .board-indicator')
+    if (boardIndicator === null) return
+    const boards = slider.querySelectorAll('.boards > .board')
     for (const e of boards) {
         boardIndicator.innerHTML += `
             <div class="indicator"></div>
         `
     }
-    changeBoard(current_board, current_board, boards)
+    const current_board = parseInt(slider.querySelector('.boards').dataset['currentBoard'])
+    const next_board = changeBoard(slider, current_board, 0, boards)
+    slider.querySelector('.boards').dataset['currentBoard'] = next_board
     updateArrowColor(current_board, boards)
 }
 
-const configureGalleryArrows = () => {
-    const left_arrow = document.querySelector('#board-arrows .arrow-left')
-    const right_arrow = document.querySelector('#board-arrows .arrow-right')
-    const boards = document.querySelectorAll('#sec--gallery .boards > .board')
+const configureSliderArrows = (slider) => {
+    const left_arrow = slider.querySelector('[data-board-arrows] .arrow-left')
+    if (left_arrow === null) return
+    const right_arrow = slider.querySelector('[data-board-arrows] .arrow-right')
+    if (right_arrow === null) return
+    const boards = slider.querySelectorAll('.boards > .board')
+    if (boards === null) return
     left_arrow.onclick = () => {
-        current_board -= 1
-        changeBoard(current_board + 1, current_board, boards)
+        const current_board = parseInt(slider.querySelector('.boards').dataset['currentBoard'])
+        const next_board = changeBoard(slider, current_board, -1, boards)
+        slider.querySelector('.boards').dataset['currentBoard'] = next_board
         updateArrowColor(current_board, boards)
     }
     right_arrow.onclick = () => {
-        current_board += 1
-        changeBoard(current_board - 1, current_board, boards)
+        const current_board = parseInt(slider.querySelector('.boards').dataset['currentBoard'])
+        const next_board = changeBoard(slider, current_board, 1, boards)
+        slider.querySelector('.boards').dataset['currentBoard'] = next_board
         updateArrowColor(current_board, boards)
     }
 }
-const changeBoard = (board0, boardf, boards) => {
-    if (boardf < 0) current_board = boardf = boards.length - 1
-    if (boardf >= boards.length) current_board = boardf = 0
+const changeBoard = (slider, board0, amount, boards) => {
+    let next_board = board0 + amount
+    if (next_board < 0) next_board = boards.length - 1
+    if (next_board >= boards.length) next_board = 0
+    console.log(boards, board0)
     boards[board0].classList.remove('current')
-    boards[boardf].classList.add('current')
-    document.querySelectorAll('.board-indicator > .indicator')[board0].classList.remove('active')
-    document.querySelectorAll('.board-indicator > .indicator')[boardf].classList.add('active')
+    boards[next_board].classList.add('current')
+    slider.querySelectorAll('.board-indicator > .indicator')[board0].classList.remove('active')
+    slider.querySelectorAll('.board-indicator > .indicator')[next_board].classList.add('active')
+    return next_board
 }
 const updateArrowColor = (current_board, boards) => {
     // document.querySelector('#sec--gallery .arrow-right').classList.remove('disabled')
@@ -171,8 +182,11 @@ const initiateCurrentImages = () => {
 window.onload = () => {
     updateScroll()
     adjustOffsets()
-    addBoardIndicators()
-    configureGalleryArrows()
+    for (const slider of  document.querySelectorAll('#sec--gallery .sliders')) {
+        console.log(slider)
+        addBoardIndicators(slider)
+        configureSliderArrows(slider)
+    }
     initiateCurrentImages()
 }
 

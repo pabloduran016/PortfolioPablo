@@ -156,7 +156,8 @@
             exam (EvAU) I got a grade of <strong>13.789</strong> out of 14. During my time in High School I passed
             with Grade A the CAE, readching <strong>C2 English Level</strong>.
             </p>
-            <img src="assets/images/dummy-image.jpg" alt="Cambridge Logo">
+            <img src="assets/images/fortuny-logo.svg" alt="IES Fortuny Logo">
+            <p class="image-caption">IES Fortuny Logo, whrere I studied Secondary School and High School.</p>
         </div>
     </div>
 </section>
@@ -169,7 +170,8 @@
     <p>In this section I have exposed the open-source projects I created through my years as programmer.<br>
         It is mainly recreational programming projects, but some served as learning material.</p>
     <div class="sliders">
-        <div class="boards">
+        <h3>Websites</h3>
+        <div class="boards" data-current-board="0">
             <div class="board">
                 <div class="board-start"></div>
                 <div class="text">
@@ -198,37 +200,74 @@
                 </div>
                 <div class="board-end"></div>
             </div>
-            <div style="display: none">
-                Sections:
-                    Websites:
-                        Portfolio
-                        Website Bea: Ask for permission
-                        WebSpy4Cast: web framekwork with flask and user interface design. Find good recording that has correct
-                    VideoGames
-                        CrazyBike
-                        Zells: unfinished project for multiplayer agario. NEED to revise it to check if it has more features
-                    Physics
-                        Phhysics Simulations:
-                            waves 3d: video and explanation waves 2d as predecesor
-                            rings and rods
-                            pendulum
-                            double pendulum
-                            ball in stick
-                            spring
-                            spring pendulum
-                        Collision Simulator: press Ctrl+R for reset. Collistion physcis with obverlapping. Profiling and performance
-                        Integrator: try match function and parsing
-                    Other:
-                        horus: refresh this up
-                        moskito: use tcpip protocol (inside fiverr folder)
-                        TOBEDONE
-            </div>
         </div>
-        <div id="board-arrows" class="arrows">
+        <div data-board-arrows class="arrows">
             <button class="arrow-left"><img src="assets/images/arrow.svg" alt="Left Arrow to move boards"></button>
             <div class="board-indicator"></div>
             <button class="arrow-right"><img src="assets/images/arrow.svg" alt="Left Arrow to move boards"></button>
         </div>
+    </div>
+    <div class="sliders">
+        <h3>Games</h3>
+        <div class="boards" data-current-board="0">
+            <div class="board">
+                <div class="board-start"></div>
+                <div class="text">
+                    <h4>CrazyBike</h4>
+                    <p>Crazy Bike was my first big project.</p>
+                    <p>I was inspired by tyhe mobilephone videogame Rider.</p>
+                    <p>I started a first version just after learning the basics of Python.</p>
+                    <p>However, I decided to start again after I improved my skills.</p>
+                    <p>For this project I used `pymunk` package to claculate the physics model and `pygame` to render the window.</p>
+                    <p>I also used `blender` to create 3D coins.</p>
+                    <p><strong>Source Code</strong>: <a href="https://www.github.com/pabloduran016/CrazyBike">Crazy Bike</a></p>
+                </div>
+                <div class="image-carousel">
+                    <div class="images" data-current-image="0">
+                        <img src="assets/images/crazybike.png" alt="Crazy bike">
+                        <video autoplay loop controls>
+                          <source src="assets/videos/crazybikerecording.mp4" type="video/mp4">
+                          Error: Could not load video
+                        </video>
+                    </div>
+                    <div class="arrows">
+                        <button class="arrow-left" onclick="changeCurrentImage(this.parentElement.parentElement.querySelector('.images'), -1)"><img src="assets/images/arrow.svg" alt="Left Arrow to move images"></button>
+                        <button class="arrow-right" onclick="changeCurrentImage(this.parentElement.parentElement.querySelector('.images'), -1)"><img src="assets/images/arrow.svg" alt="Left Arrow to move images"></button>
+                    </div>
+                </div>
+                <div class="board-end"></div>
+            </div>
+        </div>
+        <div data-board-arrows class="arrows">
+            <button class="arrow-left"><img src="assets/images/arrow.svg" alt="Left Arrow to move boards"></button>
+            <div class="board-indicator"></div>
+            <button class="arrow-right"><img src="assets/images/arrow.svg" alt="Left Arrow to move boards"></button>
+        </div>
+    </div>
+    <div style="display: none">
+        Sections:
+            Websites:
+                Portfolio
+                Website Bea: Ask for permission
+                WebSpy4Cast: web framekwork with flask and user interface design. Find good recording that has correct
+            VideoGames
+                CrazyBike
+                Zells: unfinished project for multiplayer agario. NEED to revise it to check if it has more features
+            Physics
+                Phhysics Simulations:
+                    waves 3d: video and explanation waves 2d as predecesor
+                    rings and rods
+                    pendulum
+                    double pendulum
+                    ball in stick
+                    spring
+                    spring pendulum
+                Collision Simulator: press Ctrl+R for reset. Collistion physcis with obverlapping. Profiling and performance
+                Integrator: try match function and parsing
+            Other:
+                horus: refresh this up
+                moskito: use tcpip protocol (inside fiverr folder)
+                TOBEDONE
     </div>
 </section>
 

@@ -200,8 +200,16 @@ $SEP-ANGLEF: 0deg
 
 
 .sliders
+  h3
+    text-align: center
+    padding-block: 1.4rem
+    font-weight: 300
+    font-size: 1.4rem
+    &::before
+      content: '-- '
+    &::after
+      content: ' --'
   .boards
-    padding: 2rem
     max-width: 100%
     min-height: 80vh
     display: grid
@@ -221,9 +229,8 @@ $SEP-ANGLEF: 0deg
       border-radius: .4rem
       box-shadow: 0 0 .1rem black, 0 0 .3rem grey
       padding: 2rem
-
-      display: flex
-      flex-direction: row
+      display: grid
+      grid-template-columns: 0 3fr 2fr 0
       gap: 2rem
 
       &:not(.current)
@@ -234,7 +241,6 @@ $SEP-ANGLEF: 0deg
         pointer-events: all
 
       .text
-        max-width: 50%
         display: flex
         flex-direction: column
         gap: 2rem
@@ -330,7 +336,7 @@ section
   &#sec--home
     // WHITE
     --bg-color: #{$CLR--WHITE}
-    padding: 4rem 4rem
+    padding: 4rem 4rem 5rem
     display: grid
 
     grid-template-columns: 1fr 1fr
@@ -372,7 +378,7 @@ section
 
   &#sec--about
     --bg-color: #{$CLR--MINT-GREEN}
-    padding: 2rem 2rem 4rem
+    padding: 2rem 2rem 5rem
     display: flex
     flex-direction: column
     gap: 1rem
@@ -386,7 +392,7 @@ section
 
   &#sec--work-experience
     --bg-color: #{$CLR--LIGHT-BLUE}
-    padding: 2rem 2rem 4rem
+    padding: 2rem 2rem 5rem
     display: flex
     flex-direction: column
     gap: 1rem
@@ -403,7 +409,7 @@ section
 
   &#sec--training
     --bg-color: #{$CLR--PERIWINKLE}
-    padding: 2rem 2rem 4rem
+    padding: 2rem 2rem 5rem
     display: flex
     flex-direction: column
     gap: 1rem
@@ -420,7 +426,7 @@ section
     --bg-color: #{$CLR--TEA-GREEN}
     --text-color: var(--clr--dark)
 
-    padding: 2rem 2rem 4rem
+    padding: 2rem 2rem 5rem
     display: flex
     flex-direction: column
     gap: 1rem
@@ -436,7 +442,7 @@ section
     --bg-color: #{$CLR--RICH-BLACK}
     --text-color: var(--clr--light)
 
-    padding: 2rem 2rem 4rem
+    padding: 2rem 2rem 5rem
     display: flex
     flex-direction: column
     gap: 1rem

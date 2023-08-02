@@ -95,20 +95,19 @@ const adjustOffsets  = () => {
         const style = getComputedStyle(sec)
         const height = parseFloat(style.height.split('px')[0])
         const offset = Math.max(0, height - WINDOW_HEIGHT + nav_height)
-        console.log(height, WINDOW_HEIGHT - nav_height, offset)
+        // console.log(height, WINDOW_HEIGHT - nav_height, offset)
         sec.style.setProperty('--offset', `${offset}px`)
         if (i - 1 < 0 || i - 1 >= separators.length) continue
         const sep = separators[i-1]
         const sep_style = getComputedStyle(sep)
         const sep_height = parseFloat(sep_style.height.split('px')[0])
-        console.log(sep, offset)
+        // console.log(sep, offset)
         sep?.style.setProperty('--offset', `${offset + sep_height}px`)
     }
 }
 let current_board = 0
 const addBoardIndicators = () => {
-    const boardIndicator = document.querySelector('.board-indicator')
-    if (boardIndicator === null) return
+    const boardIndicator = document.querySelector('#board-arrows > .board-indicator')
     const boards = document.querySelectorAll('#sec--gallery .boards > .board')
     for (const e of boards) {
         boardIndicator.innerHTML += `
@@ -120,8 +119,8 @@ const addBoardIndicators = () => {
 }
 
 const configureGalleryArrows = () => {
-    const left_arrow = document.querySelector('#sec--gallery .arrow-left')
-    const right_arrow = document.querySelector('#sec--gallery .arrow-right')
+    const left_arrow = document.querySelector('#board-arrows .arrow-left')
+    const right_arrow = document.querySelector('#board-arrows .arrow-right')
     const boards = document.querySelectorAll('#sec--gallery .boards > .board')
     left_arrow.onclick = () => {
         current_board -= 1
@@ -135,29 +134,46 @@ const configureGalleryArrows = () => {
     }
 }
 const changeBoard = (board0, boardf, boards) => {
-    if (boardf < 0) current_board = boardf = 0
-    if (boardf >= boards.length) current_board = boardf = boards.length - 1
-    boards[board0].style.setProperty('opacity', 0)
-    boards[boardf].style.setProperty('opacity', 1)
+    if (boardf < 0) current_board = boardf = boards.length - 1
+    if (boardf >= boards.length) current_board = boardf = 0
+    boards[board0].classList.remove('current')
+    boards[boardf].classList.add('current')
     document.querySelectorAll('.board-indicator > .indicator')[board0].classList.remove('active')
     document.querySelectorAll('.board-indicator > .indicator')[boardf].classList.add('active')
 }
 const updateArrowColor = (current_board, boards) => {
-    document.querySelector('#sec--gallery .arrow-right').classList.remove('disabled')
-    document.querySelector('#sec--gallery .arrow-left').classList.remove('disabled')
-    if (current_board === 0) {
-        document.querySelector('#sec--gallery .arrow-left').classList.add('disabled')
-    } else if (current_board === boards.length - 1) {
-        document.querySelector('#sec--gallery .arrow-right').classList.add('disabled')
-    }
+    // document.querySelector('#sec--gallery .arrow-right').classList.remove('disabled')
+    // document.querySelector('#sec--gallery .arrow-left').classList.remove('disabled')
+    // if (current_board === 0) {
+    //     document.querySelector('#sec--gallery .arrow-left').classList.add('disabled')
+    // } else if (current_board === boards.length - 1) {
+    //     document.querySelector('#sec--gallery .arrow-right').classList.add('disabled')
+    // }
+}
+const changeCurrentImage = (images, amount) => {
+    const current_image = parseInt(images.dataset['currentImage'])
+    // console.log(images, amount, current_image)
+    let next_image = current_image + amount
+    if (next_image < 0) next_image = images.children.length - 1
+    if (next_image >= images.children.length.length) next_image = 0
+    images.dataset['currentImage'] = next_image
+    images.children[current_image].classList.remove('current')
+    images.children[next_image].classList.add('current')
 }
 
+const initiateCurrentImages = () => {
+    for (const images of document.querySelectorAll('.image-carousel > .images')) {
+        console.log(images)
+        images.children[parseInt(images.dataset['currentImage'])].classList.add('current')
+    }
+}
 
 window.onload = () => {
     updateScroll()
     adjustOffsets()
     addBoardIndicators()
     configureGalleryArrows()
+    initiateCurrentImages()
 }
 
 //

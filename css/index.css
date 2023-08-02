@@ -283,7 +283,7 @@ nav ul li a::after {
   min-height: 100%;
   max-height: 100%;
   grid-area: board;
-  opacity: 0;
+  opacity: 1;
   transition: opacity ease 200ms;
   background-color: white;
   border-radius: 0.4rem;
@@ -292,6 +292,14 @@ nav ul li a::after {
   display: flex;
   flex-direction: row;
   gap: 2rem;
+}
+.sliders .boards .board:not(.current) {
+  opacity: 0;
+  pointer-events: none;
+}
+.sliders .boards .board.current {
+  opacity: 1;
+  pointer-events: all;
 }
 .sliders .boards .board .text {
   max-width: 50%;
@@ -306,15 +314,29 @@ nav ul li a::after {
 .sliders .boards .board .text p {
   font-size: 1rem;
 }
-.sliders .boards .board .image-carousel {
-  display: flex;
+.sliders .boards .board .image-carousel .images {
+  display: grid;
+  grid-template-areas: "images";
   flex-direction: row;
-  max-width: 50%;
+  max-width: 100%;
+  max-height: 100%;
   margin-inline: auto;
 }
-.sliders .boards .board .image-carousel img {
+.sliders .boards .board .image-carousel .images > img, .sliders .boards .board .image-carousel .images video {
+  border-radius: 0.5rem;
+  margin: auto;
+  grid-area: images;
+  transition: opacity 200ms ease;
   max-width: 100%;
-  gap: 1rem;
+  max-height: 100%;
+}
+.sliders .boards .board .image-carousel .images > img:not(.current), .sliders .boards .board .image-carousel .images video:not(.current) {
+  opacity: 0;
+  pointer-events: none;
+}
+.sliders .boards .board .image-carousel .images > img.current, .sliders .boards .board .image-carousel .images video.current {
+  opacity: 1;
+  pointer-events: all;
 }
 .sliders .arrows {
   padding: 1rem;
@@ -325,6 +347,7 @@ nav ul li a::after {
   flex-direction: row;
 }
 .sliders .arrows .arrow-right, .sliders .arrows .arrow-left {
+  z-index: 20;
   background-color: transparent;
   border: none;
   transition: ease 200ms;
@@ -502,6 +525,9 @@ section#sec--gallery h2 {
   display: flex;
   gap: 2rem;
 }
+section#sec--gallery p {
+  margin-inline: 3rem;
+}
 section#sec--contact {
   --bg-color: #171A21;
   --text-color: var(--clr--light);
@@ -604,9 +630,11 @@ section#sec--contact .panels .card#card--email #copied, section#sec--contact .pa
 }
 
 .scroll-sign {
+  z-index: 100;
   position: fixed;
   bottom: 1rem;
-  width: 100%;
+  left: 50%;
+  translate: -50% 0;
   visibility: hidden;
   animation-name: appear;
   animation-duration: 500ms;

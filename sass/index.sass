@@ -214,7 +214,7 @@ $SEP-ANGLEF: 0deg
       max-height: 100%
 
       grid-area: board
-      opacity: 0
+      opacity: 1
       transition: opacity ease 200ms
 
       background-color: white
@@ -225,6 +225,13 @@ $SEP-ANGLEF: 0deg
       display: flex
       flex-direction: row
       gap: 2rem
+
+      &:not(.current)
+        opacity: 0
+        pointer-events: none
+      &.current
+        opacity: 1
+        pointer-events: all
 
       .text
         max-width: 50%
@@ -239,14 +246,27 @@ $SEP-ANGLEF: 0deg
 
 
       .image-carousel
-        display: flex
-        flex-direction: row
-        //overflow-x: hidden
-        max-width: 50%
-        margin-inline: auto
-        img
+        .images
+          display: grid
+          grid-template-areas: "images"
+          flex-direction: row
+          //overflow-x: hidden
           max-width: 100%
-          gap: 1rem
+          max-height: 100%
+          margin-inline: auto
+          > img, video
+            border-radius: .5rem
+            margin: auto
+            grid-area: images
+            transition: opacity 200ms ease
+            max-width: 100%
+            max-height: 100%
+            &:not(.current)
+              opacity: 0
+              pointer-events: none
+            &.current
+              opacity: 1
+              pointer-events: all
   .arrows
     padding: 1rem
     display: flex
@@ -255,6 +275,7 @@ $SEP-ANGLEF: 0deg
     gap: 3rem
     flex-direction: row
     .arrow-right, .arrow-left
+      z-index: 20
       background-color: transparent
       border: none
       transition: ease 200ms
@@ -407,6 +428,8 @@ section
       font-size: 5rem
       display: flex
       gap: 2rem
+    p
+      margin-inline: 3rem
 
   &#sec--contact
     // BLACK
@@ -494,9 +517,11 @@ section
             display: none
 
 .scroll-sign
+  z-index: 100
   position: fixed
   bottom: 1rem
-  width: 100%
+  left: 50%
+  translate: -50% 0
   visibility: hidden
   animation-name: appear
   animation-duration: 500ms
